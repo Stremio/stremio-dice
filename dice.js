@@ -44,7 +44,7 @@ function render(item) {
 	openIn.href = `stremio://detail/${item.type}/${item.id}/${item.id}`
 	description.innerHTML = item.description || ''
 	if (item.director) description.innerHTML += `<br><br><i>Director:</i> ${item.director}`
-	if (item.cast) description.innerHTML += `<br><br><i>Cast:</i> ${item.cast.join(', ')}`
+	if (Array.isArray(item.cast) && item.cast.length) description.innerHTML += `<br><br><i>Cast:</i> ${item.cast.join(', ')}`
 	document.body.style.background = `url('https://images.metahub.space/background/medium/${item.id}/img')`
 }
 
