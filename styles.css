@@ -16,6 +16,7 @@ h1 {
 	font-size: 3em;
 	width: 80%;
 	text-align: center;
+	min-height: 60px;
 }
 a {
 	text-decoration: none;
@@ -47,4 +48,18 @@ button:hover {
 body {
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+#refresh {
+	font-size: 1.3em;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	display: block;
+	margin: 0px auto;
+}
+#refresh:hover {
+	text-decoration: underline;
+}
+#description {
+	min-height: 250px;
 }
