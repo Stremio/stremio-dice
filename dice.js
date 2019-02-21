@@ -32,6 +32,10 @@ Promise.all(requests)
 		const shuffled = shuffleArray(all)
 		const item = shuffled[0]
 		render(item)
+		const tryMore = !item.description || !item.director
+		if (tryMore) fetch(`https://v3-cinemeta.strem.io/meta/${item.type}/${item.id}.json`)
+			.then(resp => resp.json())
+			.then(resp => { if (resp.meta) render(resp.meta) })
 	})
 
 function render(item) {
