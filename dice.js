@@ -27,6 +27,12 @@ Promise.all(requests)
 		const shuffled = shuffleArray(all)
 		const rand = shuffled[0]
 		
+		const releaseInfo = rand.releaseInfo || rand.year;
+		movieTitle.innerText = `${rand.name}${releaseInfo ? ' ('+releaseInfo+')' : ''}`
+		openIn.href = `stremio://detail/${rand.type}/${rand.id}/${rand.id}`
+		description.innerText = rand.description || ''
 		document.body.style.background = `url('https://images.metahub.space/background/medium/${rand.id}/img')`
+		// @TODO set button
+		// @TODO set title
 	})
 
