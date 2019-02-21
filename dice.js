@@ -25,14 +25,17 @@ Promise.all(requests)
 		const all = everything.map(x => Array.isArray(x.metas) ? x.metas : [])
 			.reduce((a, b) => a.concat(b), [])
 		const shuffled = shuffleArray(all)
-		const rand = shuffled[0]
-		
-		const releaseInfo = rand.releaseInfo || rand.year;
-		movieTitle.innerText = `${rand.name}${releaseInfo ? ' ('+releaseInfo+')' : ''}`
-		openIn.href = `stremio://detail/${rand.type}/${rand.id}/${rand.id}`
-		description.innerText = rand.description || ''
-		document.body.style.background = `url('https://images.metahub.space/background/medium/${rand.id}/img')`
-		// @TODO set button
-		// @TODO set title
+		const item = shuffled[0]
+		render(item)
 	})
+
+function render(item) {
+	const releaseInfo = item.releaseInfo || item.year;
+	movieTitle.innerText = `${item.name}${releaseInfo ? ' ('+releaseInfo+')' : ''}`
+	openIn.href = `stremio://detail/${item.type}/${item.id}/${item.id}`
+	description.innerHTML = item.description || ''
+	if (item.director) description.innerHTML += `<br><br><i>Director:</i> ${item.director}`
+	if (item.cast) description.innerHTML += `<br><br><i>Cast:</i> ${item.cast.join(', ')}`
+	document.body.style.background = `url('https://images.metahub.space/background/medium/${item.id}/img')`
+}
 
