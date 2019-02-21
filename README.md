@@ -2,4 +2,6 @@
 
 A quick & dirty page to show a random stremio movie
 
-uses cinemeta and the IMDB lists addon
+Uses cinemeta and the IMDB lists addon
+
+**NOTE:** This will probably only work properly if you have stremio >=4.4 installed on Mac/Windows/Linux
