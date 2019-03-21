@@ -10,8 +10,8 @@ const pool = [
 	'https://stremio-imdb-list.now.sh/ls041298577/catalog/movie/imdb-movie-list.json',
 	'https://stremio-imdb-list.now.sh/ls041868378/catalog/movie/imdb-movie-list.json',
 	'https://stremio-imdb-list.now.sh/ls045252260/catalog/movie/imdb-movie-list.json',
-	'https://top-10-torrentfreak.herokuapp.com/catalog/movie/tktop10movies.json',
-	'https://top-zooqle.herokuapp.com/catalog/movie/topmovieszooqle.json',
+	'https://top10-tf.ga/catalog/movie/tktop10movies.json',
+	'https://top-zooqle.ga/catalog/movie/topmovieszooqle.json',
 ];
 
 const shuffleArray = arr => arr
