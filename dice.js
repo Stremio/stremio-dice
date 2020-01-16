@@ -6,12 +6,6 @@ const pool = [
 	'https://v3-cinemeta.strem.io/catalog/movie/top/skip=5.json',
 	'https://v3-cinemeta.strem.io/catalog/movie/imdbRating/skip=0.json',
 	'https://v3-cinemeta.strem.io/catalog/movie/imdbRating/skip=1.json',
-	'https://stremio-imdb-list.now.sh/ls028057361/catalog/movie/imdb-movie-list.json',
-	'https://stremio-imdb-list.now.sh/ls041298577/catalog/movie/imdb-movie-list.json',
-	'https://stremio-imdb-list.now.sh/ls041868378/catalog/movie/imdb-movie-list.json',
-	'https://stremio-imdb-list.now.sh/ls045252260/catalog/movie/imdb-movie-list.json',
-	'https://top10-tf.ga/catalog/movie/tktop10movies.json',
-	'https://top-zooqle.ga/catalog/movie/topmovieszooqle.json',
 ];
 
 const shuffleArray = arr => arr
