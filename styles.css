@@ -46,6 +46,13 @@ button {
 button:hover {
 	background-color: rgb(138,90,171);
 }
+button.try-again {
+	background-color: rgba(255,255,255,0.5);
+	font-size: 1.3em;
+}
+button.try-again:hover {
+	background-color: rgba(255,255,255,0.7);
+}
 body {
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -59,7 +66,7 @@ body {
 	margin: 0px auto;
 }
 #refresh:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 #description {
 	min-height: 250px;
