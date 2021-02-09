@@ -15,7 +15,7 @@ const pool = [
 const state = {
   allMovies: [],
   allGenres: [],
-  selectedGenre: undefined,
+  selectedGenre: localStorage.getItem("lastGenre"),
 };
 
 const shuffleArray = (arr) =>
