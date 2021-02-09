@@ -71,3 +71,6 @@ body {
 #description {
 	min-height: 250px;
 }
+#test-dropdown {
+  width: 100px;
+}
