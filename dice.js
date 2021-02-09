@@ -15,7 +15,7 @@ const pool = [
 const state = {
   allMovies: [],
   allGenres: [],
-  selectedGenre: localStorage.getItem("lastGenre"),
+  selectedGenre: localStorage.getItem("lastGenre") === "null" ? null : localStorage.getItem("lastGenre"),
 };
 
 const shuffleArray = (arr) =>
@@ -84,6 +84,10 @@ const populateMovie = () => {
     })
   );
   const item = shuffled[0];
+  if(!item) {
+    throw new Error('No movies in the list!');
+  };
+
   render(item);
   const tryMore = !item.description || !item.director;
   if (tryMore)
@@ -101,7 +105,9 @@ const populateGenres = () => {
     document.getElementById("test-dropdown").appendChild(optionObj);
   });
   const lastGenre = localStorage.getItem("lastGenre");
-  if (state.allGenres?.includes(lastGenre)) {
+  if(!lastGenre || lastGenre === "null") {
+    document.getElementById("test-dropdown").value = state.allGenres?.[0];
+  } else if (state.allGenres?.includes(lastGenre)) {
     document.getElementById("test-dropdown").value = lastGenre;
   } else {
     fetchMovies();
