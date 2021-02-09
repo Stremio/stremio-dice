@@ -2,7 +2,7 @@
 
 A quick & dirty page to show a random stremio movie
 
-Check it out at [https://stremio.github.io/stremio-dice/](https://stremio.github.io/stremio-dice/)
+Check it out at [https://duke79.github.io/stremio-dice](https://duke79.github.io/stremio-dice)
 
 Uses cinemeta and the IMDB lists addon
 
