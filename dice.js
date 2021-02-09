@@ -24,33 +24,40 @@ const shuffleArray = (arr) =>
     .sort((a, b) => a[0] - b[0])
     .map((a) => a[1]);
 
-const MAX_REQUESTS = 3;
-const requests = shuffleArray(pool)
-  .slice(0, MAX_REQUESTS)
-  .map((url) => fetch(url).then((resp) => resp.json()));
+const fetchMovies = () => {
+  const MAX_REQUESTS = 3;
+  const requests = shuffleArray(pool)
+    .slice(0, MAX_REQUESTS)
+    .map((url) => fetch(url).then((resp) => resp.json()));
 
-// @TODO consider ignoring errors if only some of the requests failed
-Promise.all(requests).then((everything) => {
-  const all = everything
-    .map((x) => (Array.isArray(x.metas) ? x.metas : []))
-    .reduce((a, b) => a.concat(b), []);
+  // @TODO consider ignoring errors if only some of the requests failed
+  Promise.all(requests).then((everything) => {
+    const all = everything
+      .map((x) => (Array.isArray(x.metas) ? x.metas : []))
+      .reduce((a, b) => a.concat(b), []);
 
-  state.allMovies = all;
+    state.allMovies = all;
 
-  const firstInAGenre = all.filter((movie, idx) => all.findIndex(mv => {
-    return mv.genre?.some(genre => movie.genre?.includes(genre));
-  }) === idx);
-  const genres = firstInAGenre.reduce((acc, movie) => {
-    acc.push(...movie.genre);
-    return acc;
-  }, []);
+    const firstInAGenre = all.filter(
+      (movie, idx) =>
+        all.findIndex((mv) => {
+          return mv.genre?.some((genre) => movie.genre?.includes(genre));
+        }) === idx
+    );
+    const genres = firstInAGenre.reduce((acc, movie) => {
+      acc.push(...movie.genre);
+      return acc;
+    }, []);
 
-  const uniqueGenres = genres.filter((genre, idx) => genres.indexOf(genre) === idx);
-  state.allGenres = uniqueGenres;
+    const uniqueGenres = genres.filter(
+      (genre, idx) => genres.indexOf(genre) === idx
+    );
+    state.allGenres = uniqueGenres;
 
-  populateGenres();
-  populateMovie();
-});
+    populateGenres();
+    populateMovie();
+  });
+};
 
 function render(item) {
   const releaseInfo = item.releaseInfo || item.year;
@@ -66,12 +73,16 @@ function render(item) {
   if (Array.isArray(item.genre) && item.genre.length)
     description.innerHTML += `<br><br><i>Genre:</i> ${item.genre.join(", ")}`;
   document.body.style.background = `url('https://images.metahub.space/background/medium/${item.id}/img')`;
-};
+}
 
 const populateMovie = () => {
-  const shuffled = shuffleArray(state.allMovies.filter(movie => {
-    return state.selectedGenre ? movie.genre?.includes(state.selectedGenre): true;
-  }));
+  const shuffled = shuffleArray(
+    state.allMovies.filter((movie) => {
+      return state.selectedGenre
+        ? movie.genre?.includes(state.selectedGenre)
+        : true;
+    })
+  );
   const item = shuffled[0];
   render(item);
   const tryMore = !item.description || !item.director;
@@ -84,15 +95,24 @@ const populateMovie = () => {
 };
 
 const populateGenres = () => {
-  state.allGenres.forEach( function(item) { 
+  state.allGenres.forEach(function (item) {
     const optionObj = document.createElement("option");
     optionObj.textContent = item;
     document.getElementById("test-dropdown").appendChild(optionObj);
- });
+  });
+  const lastGenre = localStorage.getItem("lastGenre");
+  if (state.allGenres?.includes(lastGenre)) {
+    document.getElementById("test-dropdown").value = lastGenre;
+  } else {
+    fetchMovies();
+  }
 };
 
 function onGenreSelected() {
   state.selectedGenre = document.getElementById("test-dropdown").value;
+  localStorage.setItem("lastGenre", state.selectedGenre);
   populateMovie();
   // alert(select.options[select.selectedIndex].text);
-};
+}
+
+fetchMovies();
